@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StudyDay;
 use App\Models\StudyList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class StudyListController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create($studyDayId)
     {
-        $studyDay = StudyDay::where('study_days_id', $studyDayId)->first();
+        $studyDay = Auth::user()->studyDays()->where('study_days_id', $studyDayId)->first();
+
+        // check if study day exist or not
+        // also check if the study day belong to the user
+        if(!$studyDay) {
+            return abort(403);
+        }
 
         return view('dashboard.study-list.form', compact('studyDay'));
     }
@@ -31,6 +31,15 @@ class StudyListController extends Controller
      */
     public function store(Request $request)
     {
+        // check if study day exist or not
+        // also check if the study day belong to the user
+
+        $studyDay = Auth::user()->studyDays()->where('study_days_id', $request->study_days_id)->first();
+
+        if(!$studyDay) {
+            return abort(403);
+        }
+
         try {
             $request->validate([
                 'title' => ['required', 'string', 'max:255'],
@@ -40,7 +49,8 @@ class StudyListController extends Controller
                 'end_time' => ['required', 'date_format:H:i'],
             ]);
 
-            StudyList::create([
+
+            Auth::user()->studyLists()->create([
                 'title' => $request->title,
                 'study_days_id' => $request->study_days_id,
                 'description' => $request->description ?? "No description.",
@@ -64,8 +74,17 @@ class StudyListController extends Controller
      */
     public function show($studyDayId)
     {
-        $study_lists = StudyList::where('study_days_id', $studyDayId)->get() ?? [];
-        $studyDay = StudyDay::where('study_days_id', $studyDayId)->first();
+        // get one study day
+        $studyDay = Auth::user()->studyDays()->where('study_days_id', $studyDayId)->first();
+
+        // check if study day exist or not
+        // also check if the study day belong to the user
+        if(!$studyDay) {
+            return abort(403);
+        }
+
+        // get all study list
+        $study_lists = Auth::user()->studyLists()->where('study_days_id', $studyDayId)->get();
 
         view('layout.layout', compact('study_lists'));
 
@@ -77,8 +96,15 @@ class StudyListController extends Controller
      */
     public function edit($studyDayId)
     {
-        $studyDay = StudyDay::where('study_days_id', $studyDayId)->first();
-        $studyList = StudyList::where('study_days_id', $studyDayId)->first();
+        $studyDay = Auth::user()->studyDays()->where('study_days_id', $studyDayId)->first() ?? [];
+
+        // check if study day exist or not
+        // also check if the study day belong to the user
+        if(!$studyDay) {
+            return abort(403);
+        }
+
+        $studyList = Auth::user()->studyLists()->where('study_days_id', $studyDayId)->first() ?? [];
 
         return view('dashboard.study-list.form_edit', compact('studyDay', 'studyList'));
     }
@@ -88,8 +114,16 @@ class StudyListController extends Controller
      */
     public function update(Request $request, $studyDayId)
     {
+        // check if study day exist or not
+        // also check if the study day belong to the user
+        $studyDay = Auth::user()->studyDays()->where('study_days_id', $request->study_days_id)->first();
+
+        if(!$studyDay) {
+            return abort(403);
+        }
+
         try {
-            $studyList = StudyList::where('study_days_id', $studyDayId)->first();
+            $studyList = Auth::user()->studyLists()->where('study_days_id', $studyDayId)->first();
 
             $request->validate([
                 'title' => ['required', 'string', 'max:255'],
@@ -98,6 +132,7 @@ class StudyListController extends Controller
                 'start_time' => ['required', 'date_format:H:i'],
                 'end_time' => ['required', 'date_format:H:i'],
             ]);
+
 
             $studyList->update([
                 'title' => $request->title,
@@ -122,8 +157,16 @@ class StudyListController extends Controller
      */
     public function destroy($studyDayId)
     {
+        // check if study day exist or not
+        // also check if the study day belong to the user
+        $studyDay = Auth::user()->studyDays()->where('study_days_id', $studyDayId)->first();
+
+        if(!$studyDay) {
+            return abort(403);
+        }
+
         try {
-            $studyList = StudyList::where('study_days_id', $studyDayId)->first();
+            $studyList = Auth::user()->studyLists()->where('study_days_id', $studyDayId)->first();
 
             $studyList->delete();
         

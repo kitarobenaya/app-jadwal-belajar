@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 @endsection
 
 @section('header')
-    <x-dashboard_component.Header title="Stuart." h1="Stuart (Study Smart) |  Study List at {{ $studyDay->date }}"/>
+    <x-dashboard_component.Header title="Stuart." h1="Stuart |  Study List at {{ $studyDay->date }}"/>
 @endsection
 
 @section('content')

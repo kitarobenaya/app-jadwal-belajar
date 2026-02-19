@@ -15,4 +15,9 @@ class StudyDay extends Model
             $studyDay->save();
         });
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

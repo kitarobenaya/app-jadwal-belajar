@@ -10,7 +10,7 @@ use Carbon\Carbon;
 @endsection
 
 @section('header')
-    <x-dashboard_component.Header title="Stuart." h1="Stuart (Study Smart) |  Add Study List Form" />
+    <x-dashboard_component.Header title="Stuart." h1="Stuart |  Add Study List Form" />
 @endsection
 
 @section('content')

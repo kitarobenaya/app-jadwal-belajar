@@ -66,5 +66,12 @@
         <div class="toggle-theme bg-black p-3 flex justify-center items-center rounded-full z-50">
             <x-heroicon-s-moon class="w-7 h-7 cursor-pointer text-lightBackground" />
         </div>
+        <form action="/logout" method="post">
+            @csrf
+            <button type="submit" class="p-3 @if(request()->routeIs('logout')) bg-lightAccent rounded-full text-white @else text-black @endif">
+                {{-- <x-heroicon-s-logout class="w-7 h-7" /> --}}
+                Logout
+            </button>
+        </form>
     </div>
 </nav>
