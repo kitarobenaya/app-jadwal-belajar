@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('dashboard.store-study-day') }}" method="POST" class="w-[80%] flex flex-col items-center gap-y-2 rounded-3xl p-4 bg-white outline-2 outline-lightBorder shadow-xl">
+    <form action="{{ route('dashboard.store-study-day') }}" method="POST" class="w-[80%] md:w-[50%] lg:w-[40%] flex flex-col items-center gap-y-2 rounded-3xl p-4 bg-white outline-2 outline-lightBorder shadow-xl">
         @csrf
 
         <h1 class="text-[1.5rem] font-semibold text-lightTextMain">Add New Schedule</h1>

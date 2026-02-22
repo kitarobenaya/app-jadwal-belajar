@@ -7,7 +7,7 @@
     @vite(['resources/css/app.css', 'resources/css/style.css','resources/js/app.js', 'resources/js/ballSlider.js'])
     <title>@yield('title')</title>
 </head>
-<body class="w-full min-h-screen relative bg-lightBackground font-inter flex flex-col items-center pt-6">
+<body class="w-full h-auto relative bg-lightBackground font-inter flex flex-col items-center pt-6">
     @yield('navbar')
 
     @yield('header')

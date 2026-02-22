@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-    <div class="container-card w-[90%] h-auto grid grid-cols-1 gap-y-4">
+    <div class="container-card w-[90%] h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4">
         @if ($all_schedules->count())
             @foreach ($all_schedules as $schedule)
                 <x-dashboard_component.study-day.Card id="{{ $schedule->id }}" studyDayId="{{ $schedule->study_days_id }}" date="{{ $schedule->date }}"/>

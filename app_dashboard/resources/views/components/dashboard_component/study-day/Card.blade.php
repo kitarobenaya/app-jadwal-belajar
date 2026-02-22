@@ -36,10 +36,11 @@ use Carbon\Carbon;
         <input type="text" name="study_day_id" value="{{ $studyDayId }}" id="{{ $studyDayId }}" hidden>
         <p class="text-center text-gray-200/80 text-[0.7rem]" id="sliderMessage">Slide to see your study schedule >></p>
     </div>
-</div>
 
-<form id="delete-study-day-form-{{ $id }}" action="{{ route('dashboard.delete-study-day', $id) }}" method="post">
-    @csrf
-    @method('DELETE')
+    <form id="delete-study-day-form-{{ $id }}" action="{{ route('dashboard.delete-study-day', $id) }}" method="post">
+        @csrf
+        @method('DELETE')
+        
+    </form>
     
-</form>
+</div>

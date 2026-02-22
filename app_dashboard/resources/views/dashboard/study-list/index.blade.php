@@ -16,7 +16,11 @@ use Illuminate\Support\Str;
 
 @section('content')
     <h2 class="font-semibold text-2xl my-4 text-center text-lightTextMain underline decoration-lightAccent">Your study list at <br>{{ Carbon::parse($studyDay->date)->format(('l')) }}, {{ $studyDay->date }}</h2>
-    <div class="container-card w-[90%] h-auto grid grid-cols-1 gap-y-4">
+    <div class="container-card w-[90%] h-auto gap-y-4
+        @if ($study_lists->count()) 
+            grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
+        @endif
+    ">
         @if($study_lists->count())
             @foreach ($study_lists as $study_list)
                 <x-dashboard_component.study-list.Card 

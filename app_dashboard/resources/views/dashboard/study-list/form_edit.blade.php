@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 @endsection
 
 @section('content')
-        <form action="{{ route('dashboard.update-study-list', $studyDay->study_days_id) }}" method="post" class="w-[80%] flex flex-col items-center rounded-3xl p-4 bg-white outline-2 outline-lightBorder shadow-xl">
+        <form action="{{ route('dashboard.update-study-list', $studyDay->study_days_id) }}" method="post" class="w-[80%] md:w-[50%] lg:w-[40%] flex flex-col items-center rounded-3xl p-4 bg-white outline-2 outline-lightBorder shadow-xl">
             @csrf
             @method('PATCH')
 

@@ -14,7 +14,7 @@ use Carbon\Carbon;
 @endsection
 
 @section('content')
-        <form action="{{ route('dashboard.store-study-list') }}" method="post" class="w-[80%] flex flex-col items-center rounded-3xl p-4 bg-white outline-2 outline-lightBorder shadow-xl">
+        <form action="{{ route('dashboard.store-study-list') }}" method="post" class="w-[80%] md:w-[50%] lg:w-[40%] flex flex-col items-center rounded-3xl p-4 bg-white outline-2 outline-lightBorder shadow-xl">
             @csrf
 
             <h1 class="text-2xl font-semibold text-lightTextMain text-center">Add New Study List at {{ Carbon::parse($studyDay->date)->format(('l')) }}, {{ $studyDay->date }}</h1>
